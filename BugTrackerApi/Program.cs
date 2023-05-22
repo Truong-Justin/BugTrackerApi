@@ -6,11 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<BugEntityContext>(option => option.UseInMemoryDatabase("BugsListDb"));
 
-// Planning to replace in memory database with SQL Server database
-//builder.Services.AddDbContext<BugEntityContext>(option => option.UseSqlServer("Bugs.db"));
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<BugEntityContext>(option => option.UseSqlServer("Server=localhost;Database=BugsDatabase;Trusted_Connection=True;"));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
