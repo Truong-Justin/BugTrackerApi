@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddDbContext<BugEntityContext>(option => option.UseSqlServer("Server=localhost;Database=BugsDatabase;Trusted_Connection=True;"));
+//builder.Services.AddDbContext<BugEntityContext>(option => option.UseSqlServer("Server=localhost;Database=BugsDatabase;Trusted_Connection=True;"));
+builder.Services.AddDbContext<BugEntityContext>(option => option.UseInMemoryDatabase("BugsDatabase"));
+
 builder.Services.AddHttpsRedirection(options => { options.HttpsPort = 443; });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -16,10 +18,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseSwagger();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
